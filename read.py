@@ -6,38 +6,37 @@ import time
 # use lambda
 def count_file(i, dir_path):
     with open(dir_path, "r") as f:
-        data = f.read().split()
-        count = Counter(data)
-        # print(data)
-        # print('=' * 60)
-        # print(count)
+        data = f.read().split() # data into array
+        count = Counter(data) # count each occurances of data points
         return count
 
 def count_folder(folder_path):
     i = 0
-    with open(f"{folder_path}/count.csv", "w") as f:
-        f.write("file_num,1,2,3,4,5,6,7,8,9,10\n")
+    with open(f"{folder_path}/count.csv", "w") as f: # output file
+        f.write("file_num,1,2,3,4,5,6,7,8,9,10\n") # csv header
         while(True):
             try:
                 count = count_file(i, f"{folder_path}/data/data-{i}.txt")
-                f.write(str(i) + ',')
-                for i in range(9):
-                    f.write(str(count[f"{i+1}"]) + ',')
-                f.write(f"{count[f"10"]}\n")
-            except FileNotFoundError:
-                print(f"total file: {i+1}")
-                break
-            i+=1
-# dir_path = "/path/to/directory"
-# Checks and creates the directory (and parent folders) if missing
-# os.makedirs(dir_path, exist_ok=True)
 
+                # write result to output file
+                f.write(str(i) + ',') # file number
+                for i in range(9):
+                    f.write(str(count[f"{i+1}"]) + ',') # each count of data point
+                f.write(f"{count[f"10"]}\n") # no comma at the last count
+
+            except FileNotFoundError: # final / last file
+                print(f"Total file: {i+1}")
+                break
+            i+=1 # Go to next file
+
+# Check Required Directory
 os.makedirs("Pdata/data", exist_ok=True)
 os.makedirs("Tdata/data", exist_ok=True)
 
 if __name__ == "__main__":
     start = time.perf_counter()
 
+    # count both Pdata and Tdata
     count_folder("Pdata")
     count_folder("Tdata")
 
