@@ -16,14 +16,14 @@ def count_file(i, dir_path):
 def count_folder(folder_path):
     i = 0
     with open(f"{folder_path}/count.csv", "w") as f:
-        f.write("file_num,1,2,3,4,5,6,7,8,9,10")
+        f.write("file_num,1,2,3,4,5,6,7,8,9,10\n")
         while(True):
             try:
                 count = count_file(i, f"{folder_path}/data/data-{i}.txt")
                 f.write(str(i) + ',')
-                for i in range(10):
+                for i in range(9):
                     f.write(str(count[f"{i+1}"]) + ',')
-                f.write("\n")
+                f.write(f"{count[f"10"]}\n")
             except FileNotFoundError:
                 print(f"total file: {i+1}")
                 break
@@ -42,4 +42,4 @@ if __name__ == "__main__":
     count_folder("Tdata")
 
     end = time.perf_counter()
-    print(f"Count Total Time: {end-start}")
+    print(f"Count Total Time: {end-start:.6f}")
