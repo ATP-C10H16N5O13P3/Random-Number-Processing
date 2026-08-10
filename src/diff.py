@@ -6,18 +6,22 @@ import numpy as np
 
 start = time.perf_counter()
 
+# load data frame
 df_P = pd.read_csv("../Pdata/count.csv")
 df_T = pd.read_csv("../Tdata/count.csv")
 
 # print(df_P)
 # print(df_T)
 
+# drop file number
 countP = df_P.drop(columns=["file_num"])
 countT = df_T.drop(columns=["file_num"])
 
+# data frame into numpy array
 arr_P = countP.to_numpy()
 arr_T = countT.to_numpy()
 
+# differences (how far is the count from 1000)
 sqrt_diff = False
 if sqrt_diff == True:
     diffP = (arr_P - 1000) ** 2
@@ -29,6 +33,7 @@ else:
 # print(diffP)
 # print(diffT)
 
+# write to file
 with open("../Pdata/diff.csv", "w") as f:
     f.write("file_num,1,2,3,4,5,6,7,8,9,10\n") # csv header
     for idx, i in enumerate(diffP):
