@@ -30,15 +30,15 @@ def count_folder(folder_path):
             i+=1 # Go to next file
 
 # Check Required Directory
-os.makedirs("Pdata/data", exist_ok=True)
-os.makedirs("Tdata/data", exist_ok=True)
+os.makedirs("../Pdata/data", exist_ok=True)
+os.makedirs("../Tdata/data", exist_ok=True)
 
 if __name__ == "__main__":
     start = time.perf_counter()
 
     # count both Pdata and Tdata
-    count_folder("Pdata")
-    count_folder("Tdata")
+    count_folder("../Pdata")
+    count_folder("../Tdata")
 
     end = time.perf_counter()
     print(f"Count Total Time: {end-start:.6f}")
