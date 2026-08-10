@@ -11,21 +11,21 @@ def count_file(i, dir_path):
         return count
 
 def count_folder(folder_path):
-    i = 0
     with open(f"{folder_path}/count.csv", "w") as f: # output file
         f.write("file_num,1,2,3,4,5,6,7,8,9,10\n") # csv header
+        i = 0
         while(True):
             try:
                 count = count_file(i, f"{folder_path}/data/data-{i}.txt")
 
                 # write result to output file
                 f.write(str(i) + ',') # file number
-                for i in range(9):
+                for j in range(9):
                     f.write(str(count[f"{i+1}"]) + ',') # each count of data point
                 f.write(f"{count[f"10"]}\n") # no comma at the last count
 
             except FileNotFoundError: # final / last file
-                print(f"Total file: {i+1}")
+                print(f"Total file: {i}")
                 break
             i+=1 # Go to next file
 
