@@ -23,8 +23,8 @@ arr_T = diffT.to_numpy()
 Ptotal_arr = np.array([np.sum(arr_P[i]) for i in range(len(arr_P))])
 Ttotal_arr = np.array([np.sum(arr_T[i]) for i in range(len(arr_T))])
 
-# print(Ptotal_arr)
-# print(Ttotal_arr)
+# reassign None to unused variable
+df_P,df_T,diffP,diffT,arr_P,arr_T = None,None,None,None,None,None
 
 # amplifying the total difference by grouping each total in 10 groups with 5 blocks (each 20)
 ''' e.g. (file number)
@@ -41,8 +41,15 @@ Ttotal_arr = np.array([np.sum(arr_T[i]) for i in range(len(arr_T))])
 40,41,43,47,49,50,51,57,58,59
 ... '''
 
+# Check for the correct amount of data
+if len(Ptotal_arr) < 100 or len(Ttotal_arr) < 100:
+    print("Missing Data")
+    exit()
+
 # run function of the the groups (combination) from combination.py
-# combination(20,10)
+BLOCKS_SIZE = 20
+GROUP_SIZE = 10
+combination(BLOCKS_SIZE,GROUP_SIZE)
 
 # read groups from combinations into array
 with open("AllCombinations.csv", "r") as f:
@@ -50,9 +57,21 @@ with open("AllCombinations.csv", "r") as f:
     for i in range(len(combination)):
         combination[i] = combination[i].split(",")
         del combination[i][-1]
-    print(combination[0])
 
-# continue
+# parse through every combination and sum their differences up
+with open("../Pdata/amp_diff.csv", "w") as f:
+    for i in range(len(combination)):
+        amp_diff = 0
+        for j in range(GROUP_SIZE):
+            amp_diff = amp_diff + Ptotal_arr[int(combination[i][j])]
+        f.write(f"{amp_diff}\n")
+
+with open("../Tdata/amp_diff.csv", "w") as f:
+    for i in range(len(combination)):
+        amp_diff = 0
+        for j in range(GROUP_SIZE):
+            amp_diff = amp_diff + Ttotal_arr[int(combination[i][j])]
+        f.write(f"{amp_diff}\n")
 
 end = time.perf_counter()
 
