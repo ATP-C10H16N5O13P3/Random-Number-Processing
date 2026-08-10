@@ -37,12 +37,12 @@ else:
 with open("../Pdata/diff.csv", "w") as f:
     f.write("file_num,1,2,3,4,5,6,7,8,9,10\n") # csv header
     for idx, i in enumerate(diffP):
-        f.write(f"{idx},{i[0]},{i[1]},{i[2]},{i[3]},{i[4]},{i[5]},{i[6]},{i[7]},{i[8]},{i[9]}")
+        f.write(f"{idx},{i[0]},{i[1]},{i[2]},{i[3]},{i[4]},{i[5]},{i[6]},{i[7]},{i[8]},{i[9]}\n")
 
 with open("../Tdata/diff.csv", "w") as f:
     f.write("file_num,1,2,3,4,5,6,7,8,9,10\n") # csv header
     for idx, i in enumerate(diffT):
-        f.write(f"{idx},{i[0]},{i[1]},{i[2]},{i[3]},{i[4]},{i[5]},{i[6]},{i[7]},{i[8]},{i[9]}")
+        f.write(f"{idx},{i[0]},{i[1]},{i[2]},{i[3]},{i[4]},{i[5]},{i[6]},{i[7]},{i[8]},{i[9]}\n")
 
 end = time.perf_counter()
 
