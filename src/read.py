@@ -21,7 +21,7 @@ def count_folder(folder_path):
                 # write result to output file
                 f.write(str(i) + ',') # file number
                 for j in range(9):
-                    f.write(str(count[f"{i+1}"]) + ',') # each count of data point
+                    f.write(str(count[f"{j+1}"]) + ',') # each count of data point
                 f.write(f"{count[f"10"]}\n") # no comma at the last count
 
             except FileNotFoundError: # final / last file
