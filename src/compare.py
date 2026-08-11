@@ -50,12 +50,39 @@ def binary_search(arr, value):
             right = mid - 1
 
     # Return -1 if the value is not in the array
-    return -1
+    return left
 
-def sum_arr_before(before_idx):
-    pass
+with open("../Pdata/score.csv", "w") as f:
+    for i in (range(len(Pdiff_sorted[:,0]))):
+        arr_idx = binary_search(Tdiff_sorted[:, 0], Pdiff_sorted[i,0])
+        f.write(f"{np.sum(Tdiff_sorted[:arr_idx,1]) * Pdiff_sorted[i,1]}\n")
 
-print(binary_search(Pdiff_sorted[:, 0], Pdiff_amp[0]))
+with open("../Tdata/score.csv", "w") as f:
+    for i in (range(len(Tdiff_sorted[:,0]))):
+        arr_idx = binary_search(Pdiff_sorted[:, 0], Tdiff_sorted[i,0])
+        f.write(f"{np.sum(Pdiff_sorted[:arr_idx,1]) * Tdiff_sorted[i,1]}\n")
+
+sum = len(Pdiff_amp) * len(Tdiff_amp)
+
+Pdiff_sorted,Pdiff_amp,Tdiff_sorted,Tdiff_amp = None,None,None,None
+
+scoreP = np.sum(np.loadtxt('../Pdata/score.csv', delimiter=',', dtype=int))
+scoreT = np.sum(np.loadtxt('../Tdata/score.csv', delimiter=',', dtype=int))
+
+scoreEqual = sum - (scoreP + scoreT)
+
+print("=" * 60)
+print(f"All: {sum}")
+print(f"ScoreP: {scoreP}")
+print(f"ScoreT: {scoreT}")
+print(f"Equal: {scoreEqual}")
+print("=" * 60)
+print("Comparing with old program")
+print(f"All: {sum*2}")
+print(f"ScoreP: {scoreP*2}")
+print(f"ScoreT: {scoreT*2}")
+print(f"Equal: {scoreEqual*2}")
+print("=" * 60)
 
 end = time.perf_counter()
 
