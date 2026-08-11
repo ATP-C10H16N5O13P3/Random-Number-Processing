@@ -41,9 +41,11 @@ def quicksort_2d(arr):
     # Recursively sort and combine
     return np.vstack((quicksort_2d(left), middle, quicksort_2d(right)))
 
+# sort
 sorted_count_Pdiff = quicksort_2d(count_Pdiff).astype(int)
 sorted_count_Tdiff = quicksort_2d(count_Tdiff).astype(int)
 
+# save to csv
 np.savetxt('../Pdata/sorted_diff.csv', sorted_count_Pdiff, delimiter=',',fmt='%.0f')
 np.savetxt('../Tdata/sorted_diff.csv', sorted_count_Tdiff, delimiter=',',fmt='%.0f')
 

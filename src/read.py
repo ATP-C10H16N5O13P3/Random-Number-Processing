@@ -2,8 +2,7 @@ from collections import Counter
 import os
 import time
 
-# use lambda
-def count_file(i, dir_path):
+def count_file(dir_path):
     with open(dir_path, "r") as f:
         data = f.read().split() # data into array
         count = Counter(data) # count each occurances of data points
@@ -15,7 +14,7 @@ def count_folder(folder_path):
         i = 0
         while(True):
             try:
-                count = count_file(i, f"{folder_path}/data/data-{i}.txt")
+                count = count_file(f"{folder_path}/data/data-{i}.txt")
 
                 # write result to output file
                 f.write(str(i) + ',') # file number
