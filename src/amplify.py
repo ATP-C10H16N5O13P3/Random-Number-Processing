@@ -69,6 +69,15 @@ def combination(n, r, block_size=20, total_limit=100, filename="AllCombinations.
     # Precompute combinations once for performance
     combos = list(itertools.combinations(elements, r))
 
+
+    results = []
+    for start in starts:
+        for combo in combos:
+            results.append([i + start - 1 for i in combo])
+            
+    return results
+
+    # write to file
     with open(filename, "w") as file:
         for start in starts:
             batch = []
@@ -89,14 +98,16 @@ def combination(n, r, block_size=20, total_limit=100, filename="AllCombinations.
 # run function of the the groups (combination)
 BLOCKS_SIZE = 20
 GROUP_SIZE = 10
-combination(BLOCKS_SIZE,GROUP_SIZE)
+combination = combination(BLOCKS_SIZE,GROUP_SIZE)
 # ==================================================
 
+'''
 # read groups from combinations into array
 with open("AllCombinations.csv", "r") as f:
     combination = f.read().splitlines()
     for i in range(len(combination)):
         combination[i] = combination[i].split(",")
+'''
 
 # parse through every combination and sum their differences up
 with open("../Pdata/amp_diff.csv", "w") as f:
